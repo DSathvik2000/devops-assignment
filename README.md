@@ -76,7 +76,106 @@ nmon
      - t → Show Top processes
      - q → Quit nmon
 - **Set up disk usage monitoring to track storage availability using df and du**.
-    - 
+   ```sh
+     df -h     #it displays the available disk space for file systems.
+   ```
+   ![image](https://github.com/user-attachments/assets/14f5ca9b-b4cf-4204-902f-533874efd987)
+   ```sh
+   du -h       #measures the disk space occupied by files or directories
+   ```
+   ![image](https://github.com/user-attachments/assets/04e8306a-4cb9-4eab-be43-b6fab819bf65)
+- Monitoring this process manually always is a huge task and even there is a chance that we might miss resource-intensive applications. So to prevent this issue we need to setup a scheduled job that takes care 
+  of all the monitoring processes and we can also see if there is any application that is unnecessarily using the resources. The script is provided in the above file named 'disk_details.sh'
+  
+    - To schedule a job that runs every 5 or 10 or any minutes according to our use, we need to specify crontab for the executable file.
+    - But before scheduling the job follow these steps:
+       - First, make the script file to executable file, to make this use the command:
+            ```sh
+             chmod +x filename.sh
+            ```
+       - After making the executable file now run the below command to schedule the job.
+           ```sh
+           crontab -e
+           */5 * * * * /path/to/executable file(.sh file)    #this job runs for every 5 minutes
+           ```
+           ![WhatsApp Image 2025-03-20 at 18 09 27_e920f89f](https://github.com/user-attachments/assets/cc8d61db-757b-4c6a-8512-f98b9e3d47d2)
+           ![WhatsApp Image 2025-03-20 at 18 09 52_0f93d8c6](https://github.com/user-attachments/assets/0fb8c902-dfe4-4ffa-a077-3fa9bfa6024b)
+---
+
+## Task-2:  User Management and Access Control
+- To set up two new user accounts use the command.
+  ```sh
+  sudo useradd Sarah
+  sudo useradd Mike
+  ```
+- To set passwords for both the user accounts.
+  ```sh
+  sudo passwd Sarah
+  sudo passwd Mike
+  ```
+- To set up dedicated directories for each user
+  ```sh
+  sudo mkdir -p /home/Sarah/workspace
+  sudo mkdir -p /home/Mike/workspace
+  ```
+- To switch to another user, use the following command.
+  ```sh
+  sudo su - Sarah    #to switch to Sarah user
+  sudo su - Mike     #to switch to Mike user
+  ```
+- To ensure only the respective users can access their directories using appropriate permissions, use the following command.
+  ```sh
+  #For Sarah
+  sudo chown Sarah:Sarah /home/Sarah/workspace
+  sudo chmod 700 /home/Sarah/workspace
+
+  #For Mike
+  sudo chown Mike:Mike /home/Mike/workspace
+  sudo chmod 700 /home/Mike/workspace
+  ```
+  ![image](https://github.com/user-attachments/assets/6824fe53-fe3f-4e3c-9674-12fcc4b1f7b2)
+  ![image](https://github.com/user-attachments/assets/f59104f7-24b9-48b8-8a43-19ef25e01c7b)
+- For implementing a password policy to enforce expiration i.e., 30 days and complexity for a password, follow the below steps.
+  
+  ![WhatsApp Image 2025-03-19 at 21 42 22_4de65b1b](https://github.com/user-attachments/assets/a7c65277-c76c-423d-bd61-7a9408048887)
+  ![WhatsApp Image 2025-03-19 at 21 43 33_aac1164e](https://github.com/user-attachments/assets/f379a101-2517-48ef-aa67-296cb7fadeee)
+  
+  ```sh
+  sudo chage -M 30 Sarah
+  sudo chage -M 30 Mike 
+  ```
+  
+  ![WhatsApp Image 2025-03-19 at 21 44 51_a46379b4](https://github.com/user-attachments/assets/954e62c7-5855-4a85-8b7f-cf83ebf7743f)
+  ![WhatsApp Image 2025-03-19 at 21 45 43_cc0d2d73](https://github.com/user-attachments/assets/10ec7e46-53aa-411d-ad32-9e20c7894698)
+
+- **For Password Complexity**:
+
+- Edit /etc/pam.d/common-password
+  ```sh
+  sudo nano /etc/pam.d/common-password
+  ``` 
+- After the file is opened for editing check for the line **password requisite pam_pwquality.so** and modify the line as below.
+  ```sh
+  password requisite pam_pwquality.so retry=3 minlen=12 dcredit=-1 ucredit=-1 lcredit=-1 ocredit=-1 enforce_for_root
+  ```
+- Edit /etc/security/pwquality.conf
+  ```sh
+  sudo nano /etc/security/pwquality.conf
+  ```
+- After the file is opened for editing modify the lines as below.
+  ```sh
+  minlen = 12        # Minimum password length (12 characters)
+  dcredit = -1       # At least 1 digit
+  ucredit = -1       # At least 1 uppercase letter
+  lcredit = -1       # At least 1 lowercase letter
+  ocredit = -1       # At least 1 special character
+  retry = 3          # Allow 3 password attempts before failure
+  ```
+  
+![WhatsApp Image 2025-03-19 at 22 09 45_a0ba1fde](https://github.com/user-attachments/assets/61370853-0276-4d1d-a480-5b768bf17a6c)
+
+
+
 
 ## 🤝 Contributing
 🙌 Contributions are welcome! Follow these steps:

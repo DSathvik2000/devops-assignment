@@ -11,8 +11,6 @@
 - [💻 System Monitoring Setup](#System-Monitoring-Setup)
 - [👤 User Management and Access Control](#User-Management-and-Access-Control)
 - [💾 Backup Configuration for Web Servers](#Backup-Configuration-for-Web-Servers)
-- [🔧 Setup and Requirements](#setup-and-requirements)
-- [💻 Usage Instructions](#usage-instructions)
 - [🤝 Contributing](#contributing)
 - [📜 License](#license)
 

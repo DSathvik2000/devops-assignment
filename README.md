@@ -183,9 +183,9 @@ nmon
   sudo usermod -aG sudo <username>    # to add user to sudoer's group
   ```
 - **For Sarah's and Mike's backup activity**, follow these steps.
-   - First login/ switch to the Sarah's user.
+   - First login/ switch to the user.
      ```sh
-     sudo su - Sarah
+     sudo su - <username>
      ```
    - After logging into the user, create a '.sh' file to perform this activity.
      ```sh
@@ -211,6 +211,7 @@ nmon
      0 0 * * 2 /path/to/filename.sh     # as per this line the job runs at 12:00 AM every Tuesday
      ```
    - To check if the job ran successfully, go inside the backup folder and check whether the **log file and .tar.gz** files are created according to the date.
+  
      ![image](https://github.com/user-attachments/assets/3035fc01-3fa8-4a36-b2e2-f18cfb2ccab6)
      ![image](https://github.com/user-attachments/assets/f138cb6c-b600-4e5e-a631-b616f23129d3)
 ---

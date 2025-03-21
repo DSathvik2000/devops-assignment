@@ -174,9 +174,48 @@ nmon
   
 ![WhatsApp Image 2025-03-19 at 22 09 45_a0ba1fde](https://github.com/user-attachments/assets/61370853-0276-4d1d-a480-5b768bf17a6c)
 
+---
 
-
-
+## Task - 3: Backup Configuration for Web Servers
+- Sarah is responsible for managing an Apache web server.
+- Mike is responsible for managing a Nginx web server. 
+- Both servers require regular backups to a secure location for disaster recovery.
+- Make sure you add these users to the **sudoer's** group so that you can execute any commands, to achieve this.
+  ```sh
+  sudo usermod -aG sudo <username>    # to add user to sudoer's group
+  ```
+- **For Sarah's and Mike's backup activity**, follow these steps.
+   - First login/ switch to the Sarah's user.
+     ```sh
+     sudo su - Sarah
+     ```
+   - After logging into the user, create a '.sh' file to perform this activity.
+     ```sh
+     sudo nano filename.sh
+     ```
+   - Write the script in this file to complete this activity(the script is in the above files).
+   - Make sure to check the owner of the file before making it as executable file.
+     ```sh
+     ls -l   # command to check the owner of the file
+     sudo chown User: User filename   # command to change the ownership of a file from root to user
+     ```
+   - After changing the ownership of the file, make the file as executable file to do this follow the command used below.
+     ```sh
+     sudo chmod +x filename
+     ```
+   - Run the file manually to check if there any errors persist.
+     ```sh
+     sudo ./filename.sh
+     ```
+   - If the above command ran successfully add a crontab(for scheduling a job to run at a particular time).
+     ```sh
+     sudo crontab -e
+     0 0 * * 2 /path/to/filename.sh     # as per this line the job runs at 12:00 AM every Tuesday
+     ```
+   - To check if the job ran successfully, go inside the backup folder and check whether the **log file and .tar.gz** files are created according to the date.
+     ![image](https://github.com/user-attachments/assets/3035fc01-3fa8-4a36-b2e2-f18cfb2ccab6)
+     ![image](https://github.com/user-attachments/assets/f138cb6c-b600-4e5e-a631-b616f23129d3)
+---
 ## 🤝 Contributing
 🙌 Contributions are welcome! Follow these steps:
 1. Fork the repository.
